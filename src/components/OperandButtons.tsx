@@ -11,6 +11,7 @@ export default function OperandButtons({handleClick}) {
                     className={'operand-btn'}
                     id={op}
                     onClick={handleClick}>
+                    {op}
                 </button>
             )
         }

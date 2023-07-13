@@ -9,8 +9,18 @@ export default function Calculator() {
     const [equation, setEquation] = useState([])
 
     function handleClick(e): void {
-        console.log(e.target.id)
-        setEquation(prev => [...prev, e.target.id])
+        const value: string = e.target.id
+        const prevValue = equation[equation.length-1]
+
+        // replace operand if prev value is of non '-' operand
+        if (prevValue && prevValue.match(/[*/+]/) && value.match(/[*/+]/)) {
+            const prev: string[] = [...equation]
+            prev[prev.length -1] = value
+            setEquation(prev)
+            return
+        }
+
+        setEquation(prev => [...prev, value])
     }
 
     return (

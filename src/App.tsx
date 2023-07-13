@@ -1,4 +1,4 @@
-import Calculator from "./assets/Calculator.tsx";
+import Calculator from "./components/Calculator.tsx";
 
 function App() {
 

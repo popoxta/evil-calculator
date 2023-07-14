@@ -16,8 +16,18 @@ export default function Calculator() {
         const prev = equation[equation.length - 1] ?? ''
         const beforePrev = equation[equation.length - 2] ?? ''
 
+        // early exit checks
+        if (
+            prev.includes('.') && current === '.'
+            || prev === '' && isNaN(+current)
+            || prev[prev.length - 1] === '.' && isNaN(+current)
+            || prev.match(allOperands) && current === '.'
+        ) {
+            return;
+        }
+
         if (!isNaN(+current) || current === '.') {
-            if (equation.length > 0 && !isNaN(+prev)){
+            if (equation.length > 0 && !isNaN(+prev)) {
                 const currEquation = [...equation]
                 currEquation[currEquation.length - 1] += current
                 setEquation(currEquation)

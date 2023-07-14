@@ -1,7 +1,6 @@
-import React, {ReactElement, useState} from "react";
+import {useState} from "react";
 import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
-
 
 // yes this is my first time using ts, have mercy
 
@@ -15,16 +14,20 @@ export default function Calculator() {
         const current: string = e.target.id
         const prev: string = equation[equation.length - 1] ?? ''
         const beforePrev: string = equation[equation.length - 2] ?? ''
+        
+        const currentIsNaN: boolean = isNaN(+current)
+        const currentIsDot: boolean = current === '.'
 
         // early exit checks
         if (
-            prev.includes('.') && current === '.'
-            || prev === '' && isNaN(+current)
-            || prev[prev.length - 1] === '.' && isNaN(+current)
-            || prev.match(allOperands) && current === '.'
+            prev.includes('.') && currentIsDot
+            || prev === '' && currentIsNaN
+            || prev[prev.length - 1] === '.' && currentIsNaN
+            || prev.match(allOperands) && currentIsDot
         ) {
             return
-        } else if ((!isNaN(+current) || current === '.') && equation.length > 0 && !isNaN(+prev)) {
+
+        } else if ((!currentIsNaN || currentIsDot) && equation.length > 0 && !isNaN(+prev)) {
             const currEquation: string[] = [...equation]
             currEquation[currEquation.length - 1] += current
             setEquation(currEquation)

@@ -2,7 +2,7 @@ import {useState} from "react";
 import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
 import Equals from "./Equals.tsx";
-import {evaluate} from "mathjs";
+import {evaluate, re} from "mathjs";
 import AC from "./AC.tsx";
 
 // yes this is my first time using ts, have mercy
@@ -51,6 +51,7 @@ export default function Calculator() {
     }
 
     function calculate(): void {
+        if (isNaN(+equation[equation.length - 1])) return
         setEquation([evaluate(equation.join('')).toString()])
     }
 

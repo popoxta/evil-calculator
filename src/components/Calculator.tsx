@@ -54,6 +54,9 @@ export default function Calculator() {
         setEquation([evaluate(equation.join('')).toString()])
     }
 
+    function allClear(): void {
+        setEquation([])
+    }
 
     return (
         <main id={'calculator'}>
@@ -61,7 +64,7 @@ export default function Calculator() {
             <Buttons handleClick={handleClick}/>
             <OperandButtons handleClick={handleClick}/>
             <Equals handleClick={calculate}/>
-            <AC/>
+            <AC handleClick={allClear}/>
         </main>
     )
 }

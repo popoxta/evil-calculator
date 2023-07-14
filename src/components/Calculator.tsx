@@ -24,35 +24,24 @@ export default function Calculator() {
             || prev.match(allOperands) && current === '.'
         ) {
             return
+        } else if ((!isNaN(+current) || current === '.') && equation.length > 0 && !isNaN(+prev)) {
+            const currEquation: string[] = [...equation]
+            currEquation[currEquation.length - 1] += current
+            setEquation(currEquation)
         }
-
-        if (!isNaN(+current) || current === '.') {
-            if (equation.length > 0 && !isNaN(+prev)) {
-                const currEquation: string[] = [...equation]
-                currEquation[currEquation.length - 1] += current
-                setEquation(currEquation)
-                return
-            }
-        }
-
         // check for double operand and replace prev
-        if (!isNaN(+beforePrev) && prev.match(allOperands) && current.match(operands)) {
+        else if (!isNaN(+beforePrev) && prev.match(allOperands) && current.match(operands)) {
             const currEquation: string[] = [...equation]
             currEquation[currEquation.length - 1] = current
             setEquation(currEquation)
-            return
         }
-
         // handles double minus logic
-        if ((current.match(allOperands) && prev === '-') && (beforePrev.match(allOperands) || beforePrev === '-')) {
+        else if ((current.match(allOperands) && prev === '-') && (beforePrev.match(allOperands) || beforePrev === '-')) {
             const currEquation: string[] = [...equation]
             currEquation.pop()
             currEquation[currEquation.length - 1] = current
             setEquation(currEquation)
-            return
-        }
-
-        setEquation(prev => [...prev, current])
+        } else setEquation(prev => [...prev, current])
     }
 
 

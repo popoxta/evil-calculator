@@ -7,7 +7,7 @@ import AC from "./AC.tsx";
 
 // yes this is my first time using ts, have mercy
 
-export default function Calculator() {
+export default function Calculator({evil}) {
     const [equation, setEquation] = useState([])
 
     const operands: RegExp = new RegExp(/[/*+]/)
@@ -52,7 +52,21 @@ export default function Calculator() {
 
     function calculate(): void {
         if (isNaN(+equation[equation.length - 1])) return
-        setEquation([evaluate(equation.join('')).toString()])
+
+        let valueToCalculate = equation.join('')
+
+        if (evil.value === '42' || evil.value === '1969') valueToCalculate = evil.value
+        else if (evil.name === 'Randomizer') valueToCalculate += randomModifier()
+        else valueToCalculate += evil.value
+
+        setEquation([evaluate(valueToCalculate).toFixed(2).toString()])
+    }
+
+    function randomModifier(): string{
+        const operators: string[] = ['+', '-', '*', '/']
+        const randomValue: string = operators[Math.floor(Math.random() * operators.length)]
+        const randomNumber: string = (Math.random() * 100).toFixed(2)
+        return `${randomValue} ${randomNumber}`
     }
 
     function allClear(): void {

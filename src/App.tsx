@@ -3,7 +3,7 @@ import EvilSelector from "./components/EvilSelector.tsx";
 import {useState} from "react";
 
 function App() {
-    const [evil, setEvil] = useState('')
+    const [evil, setEvil] = useState({name: '', value: ''})
 
     const evilOptions = [
         {name: 'You dropped a 2', value: '+2'},
@@ -16,6 +16,7 @@ function App() {
     ]
 
     function handleSetEvil(newEvil) {
+        if (newEvil === false) return
         setEvil(newEvil)
     }
 
@@ -23,7 +24,7 @@ function App() {
         <>
             <h1>Test</h1>
             <EvilSelector handleClick={handleSetEvil} evilOptions={evilOptions}/>
-            <Calculator/>
+            <Calculator evil={evil}/>
         </>
     )
 }

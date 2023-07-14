@@ -6,7 +6,7 @@ function App() {
     const [evil, setEvil] = useState({name: '', value: ''})
     const [showEvil, setShowEvil] = useState(true)
 
-    const evilOptions = [
+    const evilOptions: {name: string, value: string}[] = [
         {name: 'You dropped a 2', value: '+2'},
         {name: '95% it all', value: '* 0.95'},
         {name: 'Summer of \'69', value: '1969'},

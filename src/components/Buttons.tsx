@@ -2,7 +2,7 @@ import React, {ReactElement} from "react";
 
 export default function Buttons({handleClick}) {
 
-    const buttons = new Array(10).fill(0).map(
+    const buttons: ReactElement[] = new Array(10).fill(0).map(
         (el: number, i: number): ReactElement => {
             return (
                 <button

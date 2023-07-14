@@ -1,6 +1,7 @@
 import {useState} from "react";
 import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
+import Equals from "./Equals.tsx";
 
 // yes this is my first time using ts, have mercy
 
@@ -14,7 +15,7 @@ export default function Calculator() {
         const current: string = e.target.id
         const prev: string = equation[equation.length - 1] ?? ''
         const beforePrev: string = equation[equation.length - 2] ?? ''
-        
+
         const currentIsNaN: boolean = isNaN(+current)
         const currentIsDot: boolean = current === '.'
 
@@ -53,6 +54,7 @@ export default function Calculator() {
             <h2 id={'calculator-screen'}>{equation}</h2>
             <Buttons handleClick={handleClick}/>
             <OperandButtons handleClick={handleClick}/>
+            <Equals/>
         </main>
     )
 }

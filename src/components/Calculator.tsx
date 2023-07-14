@@ -3,6 +3,7 @@ import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
 import Equals from "./Equals.tsx";
 import {evaluate} from "mathjs";
+import AC from "./AC.tsx";
 
 // yes this is my first time using ts, have mercy
 
@@ -60,6 +61,7 @@ export default function Calculator() {
             <Buttons handleClick={handleClick}/>
             <OperandButtons handleClick={handleClick}/>
             <Equals handleClick={calculate}/>
+            <AC/>
         </main>
     )
 }

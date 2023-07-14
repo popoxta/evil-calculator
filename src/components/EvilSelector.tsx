@@ -1,11 +1,11 @@
 export default function EvilSelector({evilOptions, handleClick}) {
 
-    evilOptions.map((option: { value: string, title: string }) => {
-        return <button onClick={handleClick} value={option.value}>{option.title}</button>
+    const options = evilOptions.map((option: { value: string, name: string }) => {
+        return <button onClick={() => handleClick(option.value)} value={option.value} key={option.name}>{option.name}</button>
     })
 
     return <div className={'evil-modal'}>
-        {evilOptions}
+        {options}
     </div>
 
 }

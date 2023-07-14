@@ -2,13 +2,13 @@ import {ReactElement} from "react";
 
 export default function OperandButtons({handleClick}) {
 
-    const operands: string[] = ['+', '-', '*', '/', '.']
+    const operands: string[] = ['/', '*', '-', '+', '.']
     const operandButtons: ReactElement[] = operands.map(
-        (op: string): ReactElement => {
+        (op: string, i: number): ReactElement => {
             return (
                 <button
                     key={`btn-${op}`}
-                    className={'operand-btn'}
+                    className={`operand-${i} calculator-btn`}
                     id={op}
                     onClick={handleClick}>
                     {op}
@@ -17,9 +17,6 @@ export default function OperandButtons({handleClick}) {
         }
     )
 
-    return (
-        <div className={'calculator-operands'}>
-            {operandButtons}
-        </div>
-    )
+    return operandButtons
+
 }

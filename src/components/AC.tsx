@@ -1,4 +1,4 @@
 export default function AC({handleClick}){
 
-    return <button onClick={handleClick} id={'ac'}>AC</button>
+    return <button className={'calculator-btn ac'} onClick={handleClick} id={'ac'}>AC</button>
 }

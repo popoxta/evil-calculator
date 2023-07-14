@@ -7,7 +7,7 @@ export default function Buttons({handleClick}) {
             return (
                 <button
                     key={`btn-${i}`}
-                    className={'calculator-btn'}
+                    className={`calculator-btn number-${i}`}
                     id={i.toString()}
                     onClick={handleClick}>
                     {i}
@@ -15,10 +15,6 @@ export default function Buttons({handleClick}) {
             )
         })
 
+    return buttons
 
-    return (
-        <div className={'calculator-buttons'}>
-            {buttons}
-        </div>
-    )
 }

@@ -4,6 +4,7 @@ import {useState} from "react";
 
 function App() {
     const [evil, setEvil] = useState({name: '', value: ''})
+    const [showEvil, setShowEvil] = useState(true)
 
     const evilOptions = [
         {name: 'You dropped a 2', value: '+2'},
@@ -15,17 +16,22 @@ function App() {
         {name: 'Randomizer', value: ''}
     ]
 
-    function handleSetEvil(newEvil) {
-        if (newEvil === false) return
+    function handleSetEvil(newEvil): void {
+        setShowEvil(false)
+        if (newEvil === null) return
         setEvil(newEvil)
     }
 
     return (
-        <>
-            <h1>Test</h1>
-            <EvilSelector handleClick={handleSetEvil} evilOptions={evilOptions}/>
+        <div className={'container'}>
+            <div className={'header'}>
+                <h2>Another</h2>
+                <h1>Ordinary Calculator.</h1>
+                <h2>Seriously.</h2>
+            </div>
+            {showEvil && <EvilSelector handleClick={handleSetEvil} evilOptions={evilOptions}/>}
             <Calculator evil={evil}/>
-        </>
+        </div>
     )
 }
 

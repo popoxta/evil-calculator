@@ -2,7 +2,7 @@ import {useState} from "react";
 import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
 import Equals from "./Equals.tsx";
-import {evaluate, re} from "mathjs";
+import {evaluate} from "mathjs";
 import AC from "./AC.tsx";
 
 // yes this is my first time using ts, have mercy
@@ -53,16 +53,16 @@ export default function Calculator({evil}) {
     function calculate(): void {
         if (isNaN(+equation[equation.length - 1])) return
 
-        let valueToCalculate:string = equation.join('')
+        let valueToCalculate: string = equation.join('')
 
         if (evil.value === '42' || evil.value === '1969') valueToCalculate = evil.value
         else if (evil.name === 'Randomizer') valueToCalculate += randomModifier()
         else valueToCalculate += evil.value
 
-        setEquation([evaluate(valueToCalculate).toFixed(2).toString()])
+        setEquation([evaluate(valueToCalculate).toString()])
     }
 
-    function randomModifier(): string{
+    function randomModifier(): string {
         const operators: string[] = ['+', '-', '*', '/']
         const randomValue: string = operators[Math.floor(Math.random() * operators.length)]
         const randomNumber: string = (Math.random() * 100).toFixed(2)
@@ -75,7 +75,9 @@ export default function Calculator({evil}) {
 
     return (
         <main id={'calculator'}>
-            <h2 id={'calculator-screen'}>{equation}</h2>
+            <div className={'screen'}>
+                <h3 id={'calculator-screen'}>{equation}</h3>
+            </div>
             <Buttons handleClick={handleClick}/>
             <OperandButtons handleClick={handleClick}/>
             <Equals handleClick={calculate}/>

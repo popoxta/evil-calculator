@@ -2,7 +2,7 @@ import {useState} from "react";
 import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
 import Equals from "./Equals.tsx";
-import {evaluate} from "mathjs";
+import {evaluate, Infinity} from "mathjs";
 import AC from "./AC.tsx";
 import {Evil} from "../evil.ts";
 
@@ -29,6 +29,7 @@ export default function Calculator({evil}: {evil: Evil }) {
             || prev === '' && currentIsNaN
             || prev[prev.length - 1] === '.' && currentIsNaN
             || prev.match(allOperands) && currentIsDot
+            || prev.toString() === 'Infinity'
         ) {
             return
         } else if ((!currentIsNaN || currentIsDot) && equation.length > 0 && !isNaN(+prev)) {

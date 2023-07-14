@@ -16,7 +16,7 @@ export default function Calculator() {
         const prev = equation[equation.length - 1] ?? ''
         const beforePrev = equation[equation.length - 2] ?? ''
 
-        if (!isNaN(+current)) {
+        if (!isNaN(+current) || current === '.') {
             if (equation.length > 0 && !isNaN(+prev)){
                 const currEquation = [...equation]
                 currEquation[currEquation.length - 1] += current

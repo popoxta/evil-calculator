@@ -1,4 +1,6 @@
-export default function EvilSelector({evilOptions, handleClick}) {
+import {Evil} from "../evil.ts";
+
+export default function EvilSelector({evilOptions, handleClick}: {evilOptions: Evil[], handleClick: Function}) {
 
     const options = evilOptions.map((option: { value: string, name: string }) => {
         return <button

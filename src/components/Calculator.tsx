@@ -4,16 +4,17 @@ import OperandButtons from "./OperandButtons.tsx";
 import Equals from "./Equals.tsx";
 import {evaluate} from "mathjs";
 import AC from "./AC.tsx";
+import {Evil} from "../evil.ts";
 
 // yes this is my first time using ts, have mercy
 
-export default function Calculator({evil}) {
-    const [equation, setEquation] = useState([])
+export default function Calculator({evil}: {evil: Evil }) {
+    const [equation, setEquation] = useState([] as string[])
 
     const operands: RegExp = new RegExp(/[/*+]/)
     const allOperands: RegExp = new RegExp(/[*+/-]/)
 
-    function handleClick(e): void {
+    function handleClick(e: any): void {
         const current: string = e.target.id
         const prev: string = equation[equation.length - 1] ?? ''
         const beforePrev: string = equation[equation.length - 2] ?? ''

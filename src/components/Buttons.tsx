@@ -1,9 +1,9 @@
-import {ReactElement} from "react";
+import {MouseEventHandler, ReactElement} from "react";
 
-export default function Buttons({handleClick}) {
+export default function Buttons({handleClick}: {handleClick: MouseEventHandler<HTMLButtonElement>}) {
 
     const buttons: ReactElement[] = new Array(10).fill(0).map(
-        (el: number, i: number): ReactElement => {
+        (_: number, i: number): ReactElement => {
             return (
                 <button
                     key={`btn-${i}`}

@@ -1,12 +1,13 @@
 import Calculator from "./components/Calculator.tsx";
 import EvilSelector from "./components/EvilSelector.tsx";
 import {useState} from "react";
+import {Evil} from "./evil.ts";
 
 function App() {
     const [evil, setEvil] = useState({name: '', value: ''})
     const [showEvil, setShowEvil] = useState(true)
 
-    const evilOptions: {name: string, value: string}[] = [
+    const evilOptions: Evil[] = [
         {name: 'You dropped a 2', value: '+2'},
         {name: '95% it all', value: '* 0.95'},
         {name: 'Summer of \'69', value: '1969'},
@@ -16,7 +17,7 @@ function App() {
         {name: 'Randomizer', value: ''}
     ]
 
-    function handleSetEvil(newEvil): void {
+    function handleSetEvil(newEvil: null | Evil): void {
         setShowEvil(false)
         if (newEvil === null) return
         setEvil(newEvil)

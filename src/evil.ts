@@ -1,0 +1,1 @@
+export interface Evil {name: string, value: string}

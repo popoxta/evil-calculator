@@ -1,6 +1,6 @@
-import {ReactElement} from "react";
+import {MouseEventHandler, ReactElement} from "react";
 
-export default function OperandButtons({handleClick}) {
+export default function OperandButtons({handleClick}: {handleClick: MouseEventHandler<HTMLButtonElement>}) {
     const operands: string[] = ['/', '*', '-', '+', '.']
 
     const operandButtons: ReactElement[] = operands.map(

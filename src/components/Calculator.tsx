@@ -2,6 +2,7 @@ import {useState} from "react";
 import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
 import Equals from "./Equals.tsx";
+import {evaluate} from "mathjs";
 
 // yes this is my first time using ts, have mercy
 
@@ -48,13 +49,17 @@ export default function Calculator() {
         } else setEquation(prev => [...prev, current])
     }
 
+    function calculate(): void {
+        setEquation([evaluate(equation.join('')).toString()])
+    }
+
 
     return (
         <main id={'calculator'}>
             <h2 id={'calculator-screen'}>{equation}</h2>
             <Buttons handleClick={handleClick}/>
             <OperandButtons handleClick={handleClick}/>
-            <Equals/>
+            <Equals handleClick={calculate}/>
         </main>
     )
 }

@@ -2,7 +2,7 @@ import {ReactElement} from "react";
 
 export default function OperandButtons({handleClick}) {
 
-    const operands: string[] = ['+', '-', '*', '/']
+    const operands: string[] = ['+', '-', '*', '/', '.']
     const operandButtons = operands.map(
         (op: string): ReactElement => {
             return (

@@ -53,7 +53,7 @@ export default function Calculator({evil}) {
     function calculate(): void {
         if (isNaN(+equation[equation.length - 1])) return
 
-        let valueToCalculate = equation.join('')
+        let valueToCalculate:string = equation.join('')
 
         if (evil.value === '42' || evil.value === '1969') valueToCalculate = evil.value
         else if (evil.name === 'Randomizer') valueToCalculate += randomModifier()

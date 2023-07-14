@@ -20,6 +20,7 @@ export default function Calculator({evil}) {
 
         const currentIsNaN: boolean = isNaN(+current)
         const currentIsDot: boolean = current === '.'
+        const currEquation: string[] = [...equation]
 
         // early exit checks
         if (
@@ -29,44 +30,42 @@ export default function Calculator({evil}) {
             || prev.match(allOperands) && currentIsDot
         ) {
             return
-
         } else if ((!currentIsNaN || currentIsDot) && equation.length > 0 && !isNaN(+prev)) {
-            const currEquation: string[] = [...equation]
             currEquation[currEquation.length - 1] += current
             setEquation(currEquation)
         }
         // check for double operand and replace prev
         else if (!isNaN(+beforePrev) && prev.match(allOperands) && current.match(operands)) {
-            const currEquation: string[] = [...equation]
             currEquation[currEquation.length - 1] = current
             setEquation(currEquation)
         }
         // handles double minus logic
         else if ((current.match(allOperands) && prev === '-') && (beforePrev.match(allOperands) || beforePrev === '-')) {
-            const currEquation: string[] = [...equation]
             currEquation.pop()
             currEquation[currEquation.length - 1] = current
             setEquation(currEquation)
-        } else setEquation(prev => [...prev, current])
+        } else {
+            setEquation(prev => [...prev, current])
+        }
     }
 
     function calculate(): void {
         if (isNaN(+equation[equation.length - 1])) return
 
-        let valueToCalculate: string = equation.join('')
+        let finalEquation: string = equation.join('')
 
-        if (evil.value === '42' || evil.value === '1969') valueToCalculate = evil.value
-        else if (evil.name === 'Randomizer') valueToCalculate += randomModifier()
-        else valueToCalculate += evil.value
+        if (evil.value === '42' || evil.value === '1969') finalEquation = evil.value
+        else if (evil.name === 'Randomizer') finalEquation += randomModifier()
+        else finalEquation += evil.value
 
-        setEquation([evaluate(valueToCalculate).toString()])
+        setEquation([evaluate(finalEquation).toString()])
     }
 
     function randomModifier(): string {
         const operators: string[] = ['+', '-', '*', '/']
-        const randomValue: string = operators[Math.floor(Math.random() * operators.length)]
+        const randomOperand: string = operators[Math.floor(Math.random() * operators.length)]
         const randomNumber: string = (Math.random() * 100).toFixed(2)
-        return `${randomValue} ${randomNumber}`
+        return `${randomOperand} ${randomNumber}`
     }
 
     function allClear(): void {

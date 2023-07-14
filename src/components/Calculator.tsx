@@ -8,20 +8,43 @@ import OperandButtons from "./OperandButtons.tsx";
 export default function Calculator() {
     const [equation, setEquation] = useState([])
 
-    function handleClick(e): void {
-        const value: string = e.target.id
-        const prevValue = equation[equation.length-1]
+    const operands = new RegExp(/[/*+]/)
+    const allOperands = new RegExp(/[*+/-]/)
 
-        // replace operand if prev value is of non '-' operand
-        if (prevValue && prevValue.match(/[*/+]/) && value.match(/[*/+]/)) {
-            const prev: string[] = [...equation]
-            prev[prev.length -1] = value
-            setEquation(prev)
+    function handleClick(e): void {
+        const current: string = e.target.id
+        const prev = equation[equation.length - 1] ?? ''
+        const beforePrev = equation[equation.length - 2] ?? ''
+
+        if (!isNaN(+current)) {
+            if (equation.length > 0 && !isNaN(+prev)){
+                const currEquation = [...equation]
+                currEquation[currEquation.length - 1] += current
+                setEquation(currEquation)
+                return
+            }
+        }
+
+        // check for double operand and replace prev
+        if (!isNaN(beforePrev) && prev.match(allOperands) && current.match(operands)) {
+            const currEquation = [...equation]
+            currEquation[currEquation.length - 1] = current
+            setEquation(currEquation)
             return
         }
 
-        setEquation(prev => [...prev, value])
+        // handles double minus logic
+        if ((current.match(allOperands) && prev === '-') && (beforePrev.match(allOperands) || beforePrev === '-')) {
+            const currEquation = [...equation]
+            currEquation.pop()
+            currEquation[currEquation.length - 1] = current
+            setEquation(currEquation)
+            return
+        }
+
+        setEquation(prev => [...prev, current])
     }
+
 
     return (
         <main id={'calculator'}>

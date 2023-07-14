@@ -1,8 +1,8 @@
 import {ReactElement} from "react";
 
 export default function OperandButtons({handleClick}) {
-
     const operands: string[] = ['/', '*', '-', '+', '.']
+    
     const operandButtons: ReactElement[] = operands.map(
         (op: string, i: number): ReactElement => {
             return (

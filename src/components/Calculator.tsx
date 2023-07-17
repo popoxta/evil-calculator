@@ -2,7 +2,7 @@ import {useState} from "react";
 import Buttons from "./Buttons.tsx";
 import OperandButtons from "./OperandButtons.tsx";
 import Equals from "./Equals.tsx";
-import {evaluate, Infinity} from "mathjs";
+import {evaluate} from "mathjs";
 import AC from "./AC.tsx";
 import {Evil} from "../evil.ts";
 
